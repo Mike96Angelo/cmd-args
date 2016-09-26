@@ -12,20 +12,40 @@ example (my-program.js):
 var cmdArgs = require('cmd-args').create([
 //  [<alias>, <flag>, <description>]
     ['h',  'help',               'Displays the help for this program.'],
-    ['f',  'firstname=ARG',      'Required firstname arg.'],
-    ['l',  'lastname[=ARG]',     'Optional lastname arg.'],
-    ['m',  'middlename[=ARG+]',  'Optional multiple middlename args.'],
-    ['v',  'verbose',            'Verbose boolean flag.'],
-    [null, 'quite',              'Quite boolean flag no alias.'],
+    ['f',  'firstname=ARG',      'Required firstname arg.'            ],
+    ['l',  'lastname[=ARG]',     'Optional lastname arg.'             ],
+    ['m',  'middlename[=ARG+]',  'Optional multiple middlename args.' ],
+    ['v',  'verbose',            'Verbose boolean flag.'              ],
+    [null, 'quite',              'Quite boolean flag no alias.'       ],
 ]);
 
 var CMD_ARGS = cmdArgs.parse(process.argv.slice(2));
+
+if (CMD_ARGS.options.help) { // show help and exit
+    console.log('\nUsage: my-program <flags>');
+    console.log('\nFlags:');
+    console.log(cmdArgs.help());
+    process.exit(0);
+}
 
 console.log(CMD_ARGS);
 ```
 
 Terminal:
 ```
+$ node my-program --help
+
+Usage: my-program <flags>
+
+Flags:
+    -h, --help                 Displays the help for this program.
+    -f, --firstname=ARG        Required firstname arg.
+    -l, --lastname[=ARG]       Optional lastname arg.
+    -m, --middlename[=ARG+]    Optional multiple middlename args.
+    -v, --verbose              Verbose boolean flag.
+        --quite                Quite boolean flag no alias.
+
+
 $ node my-program
 {
   argv: [],
