@@ -1,5 +1,29 @@
 var Generator = require('generate-js');
 
+function repeat(string, times) {
+    return new Array( times + 1 ).join( string );
+}
+
+function calcMaxKeyLength(arr, arrIndex) {
+    var maxKeyLength = 0, i;
+
+    if (arr instanceof Array) {
+        for (i = 0; i < arr.length; i++) {
+            if (arr[i][arrIndex].length > maxKeyLength) {
+                maxKeyLength = arr[i][arrIndex].length;
+            }
+        }
+    } else {
+        for (i in arr) {
+            if (arr[i][arrIndex].length > maxKeyLength) {
+                maxKeyLength = arr[i][arrIndex].length;
+            }
+        }
+    }
+
+    return maxKeyLength;
+}
+
 var CommandLineParser = Generator.generate(
     /**
      * [CommandLineParser description]
@@ -58,7 +82,9 @@ CommandLineParser.definePrototype({
             throw _.optionError('Invalid duplicated option: ', opt);
         } else {
             _.parsedOptions[opt.key] = opt;
-            _.parsedOptions[opt.short] = opt;
+            if (opt.short) {
+                _.parsedOptions[opt.short] = opt;
+            }
         }
 
         return opt;
@@ -238,6 +264,25 @@ CommandLineParser.definePrototype({
     },
 
     /**
+     * Creates A help message
+     * @return {String}
+     */
+    help: function help() {
+        var _ = this,
+        helpStr = '',
+        maxLength = calcMaxKeyLength(_.options, 1);
+
+        for (var i = 0; i < _.options.length; i++) {
+            var flag = _.options[i];
+            var longName = flag[1] + repeat(' ', maxLength - flag[1].length + 4);
+
+            helpStr += '  ' + (flag[0] ? ('-' + flag[0] + ',') : '   ') + ' --' + longName + flag[2] + '\n';
+        }
+
+        return helpStr;
+    },
+
+    /**
      * Option Parser Regex
      * @type {RegExp}
      * @1 key
@@ -264,5 +309,7 @@ module.exports = CommandLineParser;
 //     ['g', 'green',        'Colors the output green.'],
 //     ['b', 'blue',         'Colors the output blue.'],
 // ]);
-
-// c.parse(['echo', 'cats', '--red', 'car']);
+//
+// console.log(c.help());
+//
+// console.log(c.parse(['echo', 'cats', '--red', 'car']));
