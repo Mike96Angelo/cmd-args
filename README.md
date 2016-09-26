@@ -35,7 +35,7 @@ Terminal:
 ```
 $ node my-program --help
 
-Usage: my-program <flags>
+Usage: my-program <flags> <argv>
 
 Flags:
     -h, --help                 Displays the help for this program.
