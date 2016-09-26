@@ -44,7 +44,7 @@ Flags:
     -m, --middlename[=ARG+]    Optional multiple middlename args.
     -v, --verbose              Verbose boolean flag.
         --quite                Quite boolean flag no alias.
-
+        
 
 $ node my-program
 {
