@@ -1,0 +1,30 @@
+{
+  "name": "cmd-args",
+  "version": "1.0.0",
+  "description": "A simple command-line argument parser for NodeJS command-line tools.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mike96Angelo/cmd-args.git"
+  },
+  "keywords": [
+    "cmd",
+    "command",
+    "line",
+    "args",
+    "argv",
+    "flags"
+  ],
+  "author": "Michaelangelo Jong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mike96Angelo/cmd-args/issues"
+  },
+  "homepage": "https://github.com/Mike96Angelo/cmd-args#readme",
+  "dependencies": {
+    "generate-js": "^2.1.3"
+  }
+}
