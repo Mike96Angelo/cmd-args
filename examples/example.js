@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
 var cmdArgs = require('cmd-args').create([
-    ['h', 'help',         'Displays the help screen.'],
-    ['r', 'red[=ARG+]',   'Colors the output red.'],
-    ['g', 'green',        'Colors the output green.'],
-    ['b', 'blue',         'Colors the output blue.'],
+//  [<alias>, <flag>, <description>]
+    ['h',  'help',               'Displays the help for this program.'],
+    ['f',  'firstname=ARG',      'Required firstname arg.'            ],
+    ['l',  'lastname[=ARG]',     'Optional lastname arg.'             ],
+    ['m',  'middlename[=ARG+]',  'Optional multiple middlename args.' ],
+    ['v',  'verbose',            'Verbose boolean flag.'              ],
+    [null, 'quite',              'Quite boolean flag no alias.'       ],
 ]);
 
 var CMD_ARGS = cmdArgs.parse(process.argv.slice(2));
-
-console.log(CMD_ARGS);
 
 if (!CMD_ARGS.argv.length || CMD_ARGS.options.help) { // show help and exit
     console.log('\nUsage: <program> <flags> <filepath>');
@@ -22,3 +23,5 @@ if (CMD_ARGS.error) { // show arg error and exit
     console.error(CMD_ARGS.error);
     process.exit(0);
 }
+
+// do stuff here
