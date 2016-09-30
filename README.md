@@ -9,7 +9,9 @@ $ npm install cmd-args
 example (my-program.js):
 
 ```javascript
-var cmdArgs = require('cmd-args').create([
+var CommandLineParser = require('cmd-args');
+
+var cmdArgs = new CommandLineParser([
 //  [<alias>, <flag>, <description>]
     ['h',  'help',               'Displays the help for this program.'],
     ['f',  'firstname=ARG',      'Required firstname arg.'            ],
@@ -44,7 +46,7 @@ Flags:
     -m, --middlename[=ARG+]    Optional multiple middlename args.
     -v, --verbose              Verbose boolean flag.
         --quite                Quite boolean flag no alias.
-        
+
 
 $ node my-program
 {
