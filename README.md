@@ -1,6 +1,6 @@
 # cmd-args
 
-[![GitHub release](https://img.shields.io/github/release/Mike96angelo/cmd-args.svg?maxAge=21600)](https://github.com/Mike96Angelo/Generate-JS)
+[![GitHub release](https://img.shields.io/github/release/Mike96angelo/cmd-args.svg?maxAge=21600)](https://github.com/Mike96Angelo/cmd-args)
 [![npm version](https://img.shields.io/npm/v/cmd-args.svg?maxAge=21600)](https://www.npmjs.com/package/cmd-args)
 [![npm downloads](https://img.shields.io/npm/dm/cmd-args.svg?maxAge=604800)](https://www.npmjs.com/package/cmd-args)
 [![npm downloads](https://img.shields.io/npm/dt/cmd-args.svg?maxAge=604800)](https://www.npmjs.com/package/cmd-args)
