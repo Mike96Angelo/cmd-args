@@ -1,4 +1,10 @@
-# cmd-args v1.0.0
+# cmd-args
+
+[![GitHub release](https://img.shields.io/github/release/Mike96angelo/cmd-args.svg?maxAge=21600)](https://github.com/Mike96Angelo/Generate-JS)
+[![npm version](https://img.shields.io/npm/v/cmd-args.svg?maxAge=21600)](https://www.npmjs.com/package/cmd-args)
+[![npm downloads](https://img.shields.io/npm/dm/cmd-args.svg?maxAge=604800)](https://www.npmjs.com/package/cmd-args)
+[![npm downloads](https://img.shields.io/npm/dt/cmd-args.svg?maxAge=604800)](https://www.npmjs.com/package/cmd-args)
+
 A simple command-line argument parser for NodeJS command-line tools.
 
 Install:
