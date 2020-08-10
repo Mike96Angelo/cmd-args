@@ -8,167 +8,120 @@
 A simple command-line argument parser for NodeJS command-line tools.
 
 Install:
+
 ```
 $ npm install cmd-args
 ```
 
-example (my-program.js):
+example:
 
-```javascript
-var CommandLineParser = require('cmd-args');
+```typescript
+import { createArgParser } from 'cmd-args'
 
-var cmdArgs = new CommandLineParser([
-//  [<alias>, <flag>, <description>]
-    ['h',  'help',               'Displays the help for this program.'],
-    ['f',  'firstname=ARG',      'Required firstname arg.'            ],
-    ['l',  'lastname[=ARG]',     'Optional lastname arg.'             ],
-    ['m',  'middlename[=ARG+]',  'Optional multiple middlename args.' ],
-    ['v',  'verbose',            'Verbose boolean flag.'              ],
-    [null, 'quite',              'Quite boolean flag no alias.'       ],
-]);
+const  myParser = createArgParser({
+  cmd: 'my-cmd',
+  title: 'My CMD',
+  description: 'my-cmd description...',
+  options: [
+    {
+      type: 'flag',
+      key: 'verbose',
+      alias: 'V',
+      description: 'Enable verbose mode.'
+    },
+    {
+      type: 'option',
+      key: 'output-file',
+      alias: 'o',
+      description: 'Specifies location to write the output file. If not set the output will go to stdout.'
+    }
+  ],
+  arguments: [
+    {
+      key: 'input-files',
+      description: 'List of input files to be used.'
+      multi: true,
+      required: true
+    }
+  ]
+});
 
-var CMD_ARGS = cmdArgs.parse(process.argv.slice(2));
+var program = myParser.parse(process.argv.slice(2));
 
-if (CMD_ARGS.options.help) { // show help and exit
-    console.log('\nUsage: my-program <flags>');
-    console.log('\nFlags:');
-    console.log(cmdArgs.help());
-    process.exit(0);
-}
-
-console.log(CMD_ARGS);
+console.log(JSON.stringify(program), null, 2))
 ```
 
-Terminal:
+example run:
+
+```bash
+$ my-cmd file1 file2
 ```
-$ node my-program --help
 
-Usage: my-program <flags> <argv>
+outputs:
 
-Flags:
-    -h, --help                 Displays the help for this program.
-    -f, --firstname=ARG        Required firstname arg.
-    -l, --lastname[=ARG]       Optional lastname arg.
-    -m, --middlename[=ARG+]    Optional multiple middlename args.
-    -v, --verbose              Verbose boolean flag.
-        --quite                Quite boolean flag no alias.
-
-
-$ node my-program
+```json
 {
-  argv: [],
-  options: {},
-  error: [Error: Missing required option: -f, --firstname]
+  "cmd": "my-cmd",
+  "options": {
+    "verbose": false,
+    "input-files": ["file1", "file2"]
+  }
 }
+```
 
-$ node my-program --firstname
+example run:
+
+```bash
+$ my-cmd file1 file2 -o file-out
+```
+
+outputs:
+
+```json
 {
-  argv: [],
-  options: {},
-  error: [Error: Invalid value supplied: -f, --firstname]
+  "cmd": "my-cmd",
+  "options": {
+    "verbose": false,
+    "input-files": ["file1", "file2"],
+    "output-file": "file-out"
+  }
 }
+```
 
-$ node my-program --firstname John
+example run:
+
+```bash
+$ my-cmd file1 file2 --output-file file-out
+```
+
+outputs:
+
+```json
 {
-  argv: [],
-  options: {
-    firstname: 'John'
-  },
-  error: null
+  "cmd": "my-cmd",
+  "options": {
+    "verbose": false,
+    "input-files": ["file1", "file2"],
+    "output-file": "file-out"
+  }
 }
+```
 
-$ node my-program -f John
-{
-  argv: [],
-  options: {
-    firstname: 'John'
-  },
-  error: null
-}
+example run:
 
-$ node my-program test -f John
-{
-  argv: ['test'],
-  options: {
-    firstname: 'John'
-  },
-  error: null
-}
+```bash
+$ my-cmd -v file1 file2 --output-file file-out
+```
 
-$ node my-program test -f John -m Jim
-{
-  argv: ['test'],
-  options: {
-    firstname: 'John',
-    middlename: ['Jim']
-  },
-  error: null
-}
+outputs:
 
-$ node my-program test -f John -m Jim -m Joe
+```json
 {
-  argv: ['test'],
-  options: {
-    firstname: 'John',
-    middlename: ['Jim', 'Joe']
-  },
-  error: null
-}
-
-$ node my-program test -f John -m Jim -m Joe -l Doe
-{
-  argv: ['test'],
-  options: {
-    firstname: 'John',
-    middlename: ['John', 'Jim'],
-    lastname: 'Doe'
-  },
-  error: null
-}
-
-$ node my-program test -f John -m Jim -m Joe -l Doe -l Bob
-{
-  argv: ['test'],
-  options: {
-    firstname: 'John',
-    middlename: ['John', 'Jim'],
-    lastname: 'Doe'
-  },
-  error: [Error: Flag already set: -l, --lastname]
-}
-
-$ node my-program test -fmml John Jim Joe Doe
-{
-  argv: ['test'],
-  options: {
-    firstname: 'John',
-    middlename: ['John', 'Jim'],
-    lastname: 'Doe'
-  },
-  error: null
-}
-
-$ node my-program test -vfmml John Jim Joe Doe
-{
-  argv: ['test'],
-  options: {
-    verbose: true,
-    firstname: 'John',
-    middlename: ['John', 'Jim'],
-    lastname: 'Doe'
-  },
-  error: null
-}
-
-$ node my-program test -fmml John Jim Joe Doe --quite
-{
-  argv: ['test'],
-  options: {
-    firstname: 'John',
-    middlename: ['John', 'Jim'],
-    lastname: 'Doe',
-    quite: true
-  },
-  error: null
+  "cmd": "my-cmd",
+  "options": {
+    "verbose": true,
+    "input-files": ["file1", "file2"],
+    "output-file": "file-out"
+  }
 }
 ```
