@@ -3,6 +3,7 @@
     "outDir": "./dist/",
     "rootDir": "./src/",
     "sourceMap": true,
+    "declaration": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noImplicitAny": true,
