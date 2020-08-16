@@ -16,7 +16,7 @@ $ npm install cmd-args
 example:
 
 ```typescript
-import { createArgParser } from './cmd-args'
+import { createArgParser } from 'cmd-args'
 
 const myParser = createArgParser({
   cmd: 'my-cmd',
@@ -106,11 +106,8 @@ outputs:
 
 ```json
 {
-  "command": ["my-cmd"],
-  "options": {
-    "verbose": false,
-    "input-files": ["file1", "file2"]
-  }
+  "verbose": false,
+  "input-files": ["file1", "file2"]
 }
 ```
 
@@ -124,12 +121,9 @@ outputs:
 
 ```json
 {
-  "command": ["my-cmd"],
-  "options": {
-    "verbose": false,
-    "input-files": ["file1", "file2"],
-    "output-file": "file-out"
-  }
+  "verbose": false,
+  "input-files": ["file1", "file2"],
+  "output-file": "file-out"
 }
 ```
 
@@ -143,12 +137,9 @@ outputs:
 
 ```json
 {
-  "command": ["my-cmd"],
-  "options": {
-    "verbose": false,
-    "input-files": ["file1", "file2"],
-    "output-file": "file-out"
-  }
+  "verbose": false,
+  "input-files": ["file1", "file2"],
+  "output-file": "file-out"
 }
 ```
 
@@ -162,11 +153,8 @@ outputs:
 
 ```json
 {
-  "command": ["my-cmd"],
-  "options": {
-    "verbose": true,
-    "input-files": ["file1", "file2"],
-    "output-file": "file-out"
-  }
+  "verbose": true,
+  "input-files": ["file1", "file2"],
+  "output-file": "file-out"
 }
 ```
