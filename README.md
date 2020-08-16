@@ -90,7 +90,7 @@ my-cmd [OPTIONS]:
   -o, --output-file[=ARG]  Specifies location to write the output file. If not set the output will go to stdout.
 
 ARGUMENTS:
-  input-files=ARG*  List of input files to be used.
+  input-files=ARG+  List of input files to be used.
 
 ```
 

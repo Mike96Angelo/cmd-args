@@ -40,8 +40,8 @@ function printOption(
     option.type === 'option'
       ? option.multi
         ? option.required
-          ? `=ARG*`
-          : '[=ARG*]'
+          ? `=ARG+`
+          : '[=ARG+]'
         : option.required
         ? `=ARG`
         : '[=ARG]'
@@ -116,8 +116,8 @@ function printOptions(cmd: Command) {
 function printArgument(argument: Argument<any>) {
   const arg = argument.multi
     ? argument.required
-      ? `=ARG*`
-      : '[=ARG*]'
+      ? `=ARG+`
+      : '[=ARG+]'
     : argument.required
     ? `=ARG`
     : '[=ARG]'
