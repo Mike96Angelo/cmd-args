@@ -255,7 +255,10 @@ function createArgParser(config: Program) {
         validateParsedOptions(parsedOptions, program)
       }
 
-      const cmd = getCMD(program, parsedOptions.command)
+      const cmd = getCMD(
+        program,
+        parsedOptions.command.slice(1)
+      )
 
       if (cmd.run) {
         cmd.run(parsedOptions.options)
