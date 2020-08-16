@@ -27,7 +27,7 @@ export function validateParsedOptions(
         arg = parsedOptions.options[option.key] = false
       }
 
-      if (arg == null) {
+      if (arg == null || arg === '') {
         if (option.required) {
           throw new ParseError(
             option.type === 'env'
