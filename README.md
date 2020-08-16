@@ -22,11 +22,13 @@ const  myParser = createArgParser({
   cmd: 'my-cmd',
   title: 'My CMD',
   description: 'my-cmd description...',
+  help: true,
+  version: 'v1.0.0',
   options: [
     {
       type: 'flag',
       key: 'verbose',
-      alias: 'V',
+      alias: 'v',
       description: 'Enable verbose mode.'
     },
     {
@@ -46,9 +48,50 @@ const  myParser = createArgParser({
   ]
 });
 
-var program = myParser.parse(process.argv.slice(2));
+var program = myParser.run();
 
 console.log(JSON.stringify(program), null, 2))
+```
+
+example run:
+
+```bash
+$ my-cmd --version
+```
+
+outputs:
+
+```
+v1.0.0
+```
+
+example run:
+
+```bash
+$ my-cmd --help
+```
+
+outputs:
+
+```
+My CMD
+
+my-cmd description...
+
+Usage:
+  my-cmd [OPTIONS] --help
+  OR
+  my-cmd [OPTIONS] <input-files>...
+
+my-cmd [OPTIONS]:
+      --version            Prints version of this command.
+      --help               Prints help text for this command.
+  -v, --verbose            Enable verbose mode.
+  -o, --output-file[=ARG]  Specifies location to write the output file. If not set the output will go to stdout.
+
+ARGUMENTS:
+  input-files=ARG*  List of input files to be used.
+
 ```
 
 example run:
@@ -61,7 +104,7 @@ outputs:
 
 ```json
 {
-  "cmd": "my-cmd",
+  "command": ["my-cmd"],
   "options": {
     "verbose": false,
     "input-files": ["file1", "file2"]
@@ -79,7 +122,7 @@ outputs:
 
 ```json
 {
-  "cmd": "my-cmd",
+  "command": ["my-cmd"],
   "options": {
     "verbose": false,
     "input-files": ["file1", "file2"],
@@ -98,7 +141,7 @@ outputs:
 
 ```json
 {
-  "cmd": "my-cmd",
+  "command": ["my-cmd"],
   "options": {
     "verbose": false,
     "input-files": ["file1", "file2"],
@@ -117,7 +160,7 @@ outputs:
 
 ```json
 {
-  "cmd": "my-cmd",
+  "command": ["my-cmd"],
   "options": {
     "verbose": true,
     "input-files": ["file1", "file2"],
