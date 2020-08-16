@@ -30,7 +30,9 @@ export function validateParsedOptions(
       if (arg == null) {
         if (option.required) {
           throw new ParseError(
-            `Missing required option ${option.key}.`,
+            option.type === 'env'
+              ? `Missing required env var ${option.env}`
+              : `Missing required option ${option.key}.`,
             parsedOptions
           )
         } else {
