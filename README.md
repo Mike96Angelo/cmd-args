@@ -16,41 +16,43 @@ $ npm install cmd-args
 example:
 
 ```typescript
-import { createArgParser } from 'cmd-args'
+import { createArgParser } from './cmd-args'
 
-const  myParser = createArgParser({
+const myParser = createArgParser({
   cmd: 'my-cmd',
   title: 'My CMD',
   description: 'my-cmd description...',
   help: true,
   version: 'v1.0.0',
+  run: (options) => {
+    console.log(options)
+  },
   options: [
     {
       type: 'flag',
       key: 'verbose',
       alias: 'v',
-      description: 'Enable verbose mode.'
+      description: 'Enable verbose mode.',
     },
     {
       type: 'option',
       key: 'output-file',
       alias: 'o',
-      description: 'Specifies location to write the output file. If not set the output will go to stdout.'
-    }
+      description:
+        'Specifies location to write the output file. If not set the output will go to stdout.',
+    },
   ],
   arguments: [
     {
       key: 'input-files',
-      description: 'List of input files to be used.'
+      description: 'List of input files to be used.',
       multi: true,
-      required: true
-    }
-  ]
-});
+      required: true,
+    },
+  ],
+})
 
-var program = myParser.run();
-
-console.log(JSON.stringify(program), null, 2))
+myParser.run()
 ```
 
 example run:

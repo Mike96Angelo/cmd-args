@@ -218,6 +218,20 @@ function parseArguments(
   )
 }
 
+function getCMD(
+  command: CommandInternal,
+  path: string[]
+): CommandInternal {
+  if (path.length === 0) {
+    return command
+  }
+
+  return getCMD(
+    command.commandsByKey[path[0]],
+    path.slice(1)
+  )
+}
+
 function createArgParser(config: Program) {
   const program = initConfig(config) as ProgramInternal
 
@@ -241,7 +255,11 @@ function createArgParser(config: Program) {
         validateParsedOptions(parsedOptions, program)
       }
 
-      return parsedOptions
+      const cmd = getCMD(program, parsedOptions.command)
+
+      if (cmd.run) {
+        cmd.run(parsedOptions.options)
+      }
     } catch (error) {
       if (error instanceof ParseError) {
         console.log(printError(error))
