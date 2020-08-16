@@ -16,7 +16,7 @@ $ npm install cmd-args
 example:
 
 ```typescript
-import { createArgParser } from './cmd-args'
+import { createArgParser } from 'cmd-args'
 
 const myParser = createArgParser({
   cmd: 'my-cmd',
