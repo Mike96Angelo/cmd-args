@@ -22,7 +22,7 @@ export interface Command {
   commands?: Command[]
   commandRequired?: boolean
   arguments?: Argument<any>[]
-  run?: (options: Record<string, Option<any>>) => void
+  run?: (options: Record<string, any>) => void
 }
 
 export interface Program extends Command {

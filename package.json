@@ -1,6 +1,6 @@
 {
   "name": "cmd-args",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "A simple command-line argument parser for NodeJS command-line tools.",
   "main": "dist/cmd-args.js",
   "types": "dist/cmd-args.d.ts",
@@ -12,12 +12,14 @@
     "url": "git+https://github.com/Mike96Angelo/cmd-args.git"
   },
   "keywords": [
+    "cli",
     "cmd",
     "command",
     "line",
     "args",
     "argv",
-    "flags"
+    "flags",
+    "parser"
   ],
   "author": "Michaelangelo Jong",
   "license": "MIT",
